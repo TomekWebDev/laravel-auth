@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -21,7 +22,10 @@ class PostController extends Controller
 
 
         $user = Auth::user();
+        // $posts = Post::with('category')->paginate(10);
+
         $posts = Post::All();
+
 
         // posso creare la solita array multidimensionale $data per portarmi dentro entrambe le variabili che ho salvato
 
@@ -35,7 +39,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.post.create');
+
+        $categories = Category::All();
+
+        return view('admin.post.create', compact('categories'));
     }
 
     /**
@@ -92,7 +99,9 @@ class PostController extends Controller
     {
         $post_to_edit = Post::findOrFail($id);
 
-        return view('admin.post.edit', compact('post_to_edit'));
+        $categories = Category::All();
+
+        return view('admin.post.edit', compact('post_to_edit', 'categories'));
     }
 
     /**

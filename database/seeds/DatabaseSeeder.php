@@ -11,6 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(PostSeeder::class);
+        $this->call(
+            [
+                PostSeeder::class,
+                CategorySeeder::class // l'ordine con cui li scrivo è importante a seconda delle relazioni della tabella
+            ]
+        );
     }
 }

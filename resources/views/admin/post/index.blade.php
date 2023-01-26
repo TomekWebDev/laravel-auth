@@ -11,7 +11,12 @@
         <div class="card w-25 m-1">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">{{ $item->title }}</h5>
+                <h4 class="card-title">{{ $item->title }}</h4>
+
+                @if ($item->category)
+                    <h6 class="card-subtitle">{{ $item->category->name }}</h6>
+                @endif
+
                 <p class="card-text">{{ $item->body }}</p>
                 <a href="{{ route('admin.post.show', $item->id) }}" class="btn btn-primary">Show</a>
                 <a href="{{ route('admin.post.edit', $item->id) }}" class="btn btn-warning">Edit</a>
